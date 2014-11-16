@@ -4,7 +4,7 @@ var clientWidth,
 
 $(document).ready(function(){
     setSize();
-    init();
+    //init();
 });
 
 $(window).resize(function(){
@@ -14,8 +14,23 @@ $(window).resize(function(){
 function setSize(){
     clientWidth = $(window).width();
     clientHeight = $(window).height();
-    $('.wrap').each(function(){
+    $('.wrap').each(function(index){
         $(this).css({height:clientHeight,width:clientWidth});
+        switch (index) {
+        case 0:
+            // 878*960
+            var _height = clientHeight-120,
+                _width = Math.round(878*_height/960),
+                _left = (clientWidth-_width)/2;
+            var $bg = $(this).find('.bg');
+
+            $bg.css({left:_left,height:_height,width:_width,backgroundSize:(_height*100/960)+'%',backgroundPosition:'50% -'+(_height*100/960)+'%'});
+            var $name = $(this).find('.name');
+            $name.css({paddingTop:Math.round(clientHeight/2)})
+            break;
+        case 1:
+            break;
+        }
     });
 }
 
