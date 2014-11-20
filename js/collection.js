@@ -13,12 +13,12 @@ var getItems = function(){
 };
 
 var onProgress = function(imgLoad, image){
-    // TODO
+    console.log(imgLoad, image);
 };
 
 var onAlways = function(){
-    console.log('...');
     $('#loading').hide();
+    $('#content').css({opacity:1});
 }
 
 $(document).ready(function(){
@@ -28,13 +28,15 @@ $(document).ready(function(){
         imgList = g_data || [];
 
     var $status = $('#loading');
-    var $container = $('#container');
+    var $container = $('#content');
 
     var items = getItems();
-    $container.prepend($(items));
+    //$container.prepend($(items));
     // initialize Masonry after all images have loaded  
     $container.imagesLoaded(function(){
-      $container.masonry();
+      $container.masonry({
+        itemSelector: '.item'
+      });
     }).progress(onProgress)
       .always(onAlways);
 });

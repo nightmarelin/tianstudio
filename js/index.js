@@ -4,7 +4,7 @@ var clientWidth,
 
 $(document).ready(function(){
     setSize();
-    //init();
+    init();
 });
 
 $(window).resize(function(){
@@ -15,7 +15,7 @@ function setSize(){
     clientWidth = $(window).width();
     clientHeight = $(window).height();
     $('.wrap').each(function(index){
-        $(this).css({height:clientHeight,width:clientWidth});
+        $(this).css({height:clientHeight});
         switch (index) {
         case 0:
             // 878*960
@@ -23,12 +23,34 @@ function setSize(){
                 _width = Math.round(878*_height/960),
                 _left = (clientWidth-_width)/2;
             var $bg = $(this).find('.bg');
-
-            $bg.css({left:_left,height:_height,width:_width,backgroundSize:(_height*100/960)+'%',backgroundPosition:'50% -'+(_height*100/960)+'%'});
-            var $name = $(this).find('.name');
-            $name.css({paddingTop:Math.round(clientHeight/2)})
+            $bg.css({left:_left,height:_height,width:_width});
+            //$bg.css({left:_left,height:_height,width:_width,backgroundSize:(_height*100/960)+'%',backgroundPosition:'50% -'+(_height*100/960)+'%'});
+            //var $name = $(this).find('.name');
+            //$name.css({paddingTop:Math.round(clientHeight/2)})
             break;
         case 1:
+            // 878*960
+            var _height = clientHeight-120,
+                _width = Math.round(878*_height/960),
+                _left = clientWidth/2;
+            var $bg = $(this).find('.bg');
+            $bg.css({left:_left,height:_height,width:_width});
+            break;
+        case 2:
+            // 1316*960
+            var _height = clientHeight-120,
+                _width = Math.round(1316*_height/960),
+                _left = (clientWidth-_width)/2;
+            var $bg = $(this).find('.bg');
+            $bg.css({left:_left,height:_height,width:_width});
+            break;
+        case 3:
+            // 422*632
+            // var _height = clientHeight-120,
+            //     _width = Math.round(422*_height/632),
+            //     _left = (clientWidth-_width)/2;
+            // var $bg = $(this).find('.bg');
+            // $bg.css({left:_left,height:_height,width:_width});
             break;
         }
     });
@@ -43,6 +65,7 @@ var _handler = function(event){
     currTime = +new Date;
     if (currTime - prevTime < 600)
         return false;
+    console.log(event);
     event.preventDefault();
     var _event = event.originalEvent;
     var _marginTop = currScreen * clientHeight;
@@ -78,6 +101,36 @@ var _handler = function(event){
 };
 
 function init(){
+    $(document).scroll(function(){
+        var _ch = clientHeight,
+            _st = $(window).scrollTop();
+        if (_st < _ch) {
+            $('#home').css({position:'fixed'});
+            $('#fashion').css({position:'absolute'});
+            $('#creation').css({position:'absolute'});
+            $('#logoImg').attr('src','images/logo_white.png');
+            $('#navList').removeClass('nav1');
+        } else if (_st >= _ch && _st < _ch *2) {
+            $('#home').css({position:'absolute'});
+            $('#fashion').css({position:'fixed'});
+            $('#creation').css({position:'absolute'});
+            $('#logoImg').attr('src','images/logo_white.png');
+            $('#navList').removeClass('nav1');
+        } else if (_st >= _ch * 2 && _st < _ch *3) {
+            $('#home').css({position:'absolute'});
+            $('#fashion').css({position:'absolute'});
+            $('#creation').css({position:'fixed'});
+            $('#logoImg').attr('src','images/logo_white.png');
+            $('#navList').removeClass('nav1');
+        } else {
+            $('#home').css({position:'absolute'});
+            $('#fashion').css({position:'absolute'});
+            $('#creation').css({position:'absolute'});
+            $('#logoImg').attr('src','images/logo_black.png');
+            $('#navList').addClass('nav1');
+        }
+    });
+    return;
     if ('onmousewheel' in document.body) {
         //for ie and webkit
         $(document.body).bind('mousewheel',_handler);
@@ -85,104 +138,5 @@ function init(){
         $(document.body).bind('DOMMouseScroll',_handler);
     }
 }
-
-return;
-
-document.body.onmousewheel = function(event) {
-    currTime = new Date();
-    //alert(currTime - prevTime);
-    if (currTime - prevTime < 600 ) {
-        return false;
-    }
-    event = window.event || event; 
-    event.preventDefault;
-    var mt = -pos*windowHeight;
-    delta = event.wheelDelta / 120;
-    if (delta < 0){
-        if (pos != 7 && pos != 0 ) {
-            pos++;
-            mt = mt - windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-        }
-        else if (pos == 0) {
-            pos++;
-            mt = mt - windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-            $(".logo").attr("src","images/logo_s.png")
-        }
-        prevTime = new Date();
-    }
-    else {
-        if (pos > 1) {
-            pos--;
-            mt = mt + windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-        }
-        else if (pos == 1) {
-            pos--;
-            mt = mt + windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-            $(".logo").attr("src","images/logo.png")
-        }
-        prevTime = new Date();
-    }
-    
-};
-
-//for moz
-document.body.addEventListener("DOMMouseScroll", function(event) {
-    currTime = new Date();
-    if (currTime - prevTime < 600 ) {
-        return false;
-    }
-    event = window.event || event; 
-    event.preventDefault;
-    var mt = -pos*windowHeight;
-    delta = - (event.detail)/3;
-    if (delta < 0){
-        if (pos != 7 && pos != 0 ) {
-            $(".indicator li").eq(pos).find("span").fadeOut(500);
-            $(".indicator li").eq(pos).css("background","#FFF");
-            pos++;
-            $(".indicator li").eq(pos).find("span").fadeIn(800);
-            $(".indicator li").eq(pos).css("background","none");
-            mt = mt - windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-        }
-        else if (pos == 0) {
-            $(".indicator li").eq(pos).find(".home").css("display","none");
-            $(".indicator li").eq(pos).find(".home_l").css("display","block");
-            pos++;
-            $(".indicator li").eq(pos).find("span").fadeIn(800);
-            $(".indicator li").eq(pos).css("background","none");
-            mt = mt - windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-            $(".logo").attr("src","images/logo_s.png")
-        }
-        prevTime = new Date();
-    }
-    else {
-        if (pos > 1) {
-            $(".indicator li").eq(pos).find("span").fadeOut(500);
-            $(".indicator li").eq(pos).css("background","#FFF");
-            pos--;
-            $(".indicator li").eq(pos).find("span").fadeIn(800);
-            $(".indicator li").eq(pos).css("background","none");
-            mt = mt + windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-        }
-        else if (pos == 1) {
-            $(".indicator li").eq(pos).find("span").fadeOut(500);
-            $(".indicator li").eq(pos).css("background","#FFF");
-            pos--;
-            $(".indicator li").eq(pos).find(".home_l").css("display","none");
-            $(".indicator li").eq(pos).find(".home").css("display","block");
-            mt = mt + windowHeight;
-            $(".wrap").animate({marginTop:mt},{duration:400,queue:true});
-            $(".logo").attr("src","images/logo.png")
-        }
-        prevTime = new Date();
-    }
-});
 
 })(jQuery);
