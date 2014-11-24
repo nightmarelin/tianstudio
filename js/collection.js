@@ -21,6 +21,7 @@ var onAlways = function(){
     $('#content').css({opacity:1});
 }
 
+// 展示模式，6表示多行显示，2表示单行显示
 var _showMode = 6;
 $(document).ready(function(){
     setSize();
@@ -74,7 +75,6 @@ function setSize(){
     clientHeight = $(window).height();
     $('#container .item').each(function(index){
         var _height = clientHeight-100;
-        console.log(_height);
         $(this).css({height:_height});
         $(this).find(".img").css({height:_height-40})
     });

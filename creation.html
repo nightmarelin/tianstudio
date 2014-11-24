@@ -7,38 +7,104 @@
   <!--[if lt IE 9]>
   <script src="js/html5shiv.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="css/main.css"/>
-  <script src="js/jquery/2.0.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="./css/collection.css"/>
+  <script src="./js/jquery/2.0.0/jquery.min.js"></script>
+  <script src="./js/masonry.pkgd.min.js"></script>
+  <script src="./js/imagesloaded.pkgd.min.js"></script>
+  <script src="./js/collection.js"></script>
 </head>
 <body>
   <header>
-    <div class="g-hd">
-      <h1 class="logo"><img src="images/logo.png" alt="Tian Studio"></h1>
-      <ul class="nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/fashion.html">Fashion</a></li>
-        <li><a href="/creation.html">Creation</a></li>
-        <li><a href="/film.html">Film</a></li>
-        <li><a href="/aboutme.html">About Me</a></li>
-      </ul>
+    <div class="g-hd g-hd1">
+      <h1 class="logo">
+        <a href="/"><img id="logoImg" src="images/logo_black.png" alt="Tian Studio"/></a>
+      </h1>
+      <div class="nb">
+        <ul class="nav nav1 f-cb" id="navList">
+          <li><a href="/">Home</a></li>
+          <li><a href="/fashion.html">Fashion</a></li>
+          <li><a href="/creation.html" class="curr">Creation</a></li>
+          <li><a href="/film.html">Film</a></li>
+          <li><a href="/aboutme.html">About me</a></li>
+        </ul>
+        <!--
+        <div class="curr curr-2 transform"></div>
+        <div class="mask"></div>
+        -->
+      </div>
     </div>
   </header>
-  <div class="g-doc" id="main_box">
-    <div class="cnt">
-      <ul class="m-album m-album-1 f-cb">
-        <li class="item">
-          <img src="./images/creation/1.jpg">
-          <a href="#"><div class="mask"><p class="title">CREATION ONE</p></div></a>
-        </li>
-        <li class="item">
-          <img src="./images/creation/2.jpg">
-          <a href="#"><div class="mask"><p class="title">TOUCH COLLECTION</p></div></a>
-        </li>
-        <li class="item">
-          <img src="./images/creation/3.jpg">
-          <a href="#"><div class="mask"><p class="title">CREATION THREE</p></div></a>
-        </li>
-      </ul>
+  <div class="g-doc1" id="main_box">
+    <div class="cnt m-coll">
+      <div class="mode">
+        <a class="icon mode2" href="javascript:;" id="switch2Link"></a>
+        <a class="icon mode6" href="javascript:;" id="switch6Link" style="display:none;"></a>
+      </div>
+      <div class="side">
+        <!--
+        <h2 class="ttl f-ff1">FASHION JEWELRY</h2>
+        <p class="f-pr"><a class="btn" href="#">返回</a></p>
+        -->
+        <ul class="nav">
+          <li><a href="#" class="curr">CREATION ONE</a></li>
+          <li><a href="#">TOUCH COLLECTION</a></li>
+          <li><a href="#">CREATION THREE</a></li>
+        </ul>
+      </div>
+      <div class="status" id="loading"><img src="../images/loading.gif"></div>
+      <div class="list grid" id="content">
+         <div class="item">
+            <img class="album-image " src="../images/fashion/small/01.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/03.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/04.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/05.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/06.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/07.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/08.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/09.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/10.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/11.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+          <div class="item">
+            <img class="album-image " src="../images/fashion/small/12.jpg" data-img-width="1000" data-img-height="1500" />
+          </div>
+      </div>
+      <div class="list single" id="container" style="display:none;">
+        <div class="item itwo">
+          <img class="img" src="../images/fashion/small/01.jpg" />
+          <img class="img" src="../images/fashion/small/03.jpg" />
+        </div>
+        <div class="item itwo">
+          <img class="img" src="../images/fashion/small/04.jpg" />
+          <img class="img" src="../images/fashion/small/05.jpg" />
+        </div>
+        <div class="item itwo">
+          <img class="img" src="../images/fashion/small/06.jpg" />
+          <img class="img" src="../images/fashion/small/07.jpg" />
+        </div>
+        <div class="item">
+          <img class="img" src="../images/fashion/small/08.jpg" />
+        </div>
+      </div>
     </div>
   </div>
 </body>
